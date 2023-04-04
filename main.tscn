@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dx860xmw4o61e"]
+[gd_scene load_steps=21 format=3 uid="uid://dx860xmw4o61e"]
 
 [ext_resource type="Shader" path="res://shaders/water.gdshader" id="1_kgyrd"]
 [ext_resource type="Script" path="res://main.gd" id="1_mxt7d"]
@@ -58,6 +58,11 @@ albedo_texture = ExtResource("5_0y8xb")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_whiw6"]
 albedo_texture = ExtResource("5_0y8xb")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uy55y"]
+friction = 0.0
+bounce = 1.0
+absorbent = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rxtu0"]
 
@@ -149,21 +154,19 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("BoxShape3D_h26s0")
 
 [node name="ContactTimer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 1.5
 autostart = true
 
 [node name="Balls" type="Node3D" parent="."]
 
 [node name="Chaos_Ball4" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
-mass = 1000.0
+mass = 500.0
 physics_material_override = SubResource("PhysicsMaterial_7sd2t")
 gravity_scale = 0.0
 continuous_cd = true
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Balls/Chaos_Ball4"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_6cl6v")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball4/CollisionShape3D"]
@@ -171,13 +174,13 @@ material = SubResource("StandardMaterial3D_g5c1p")
 
 [node name="Chaos_Ball3" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
-mass = 1000.0
+mass = 500.0
 physics_material_override = SubResource("PhysicsMaterial_7sd2t")
 gravity_scale = 0.0
 continuous_cd = true
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Balls/Chaos_Ball3"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_6cl6v")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball3/CollisionShape3D"]
@@ -185,13 +188,13 @@ material = SubResource("StandardMaterial3D_gdei4")
 
 [node name="Chaos_Ball2" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
-mass = 1000.0
+mass = 500.0
 physics_material_override = SubResource("PhysicsMaterial_7sd2t")
 gravity_scale = 0.0
 continuous_cd = true
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Balls/Chaos_Ball2"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_6cl6v")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball2/CollisionShape3D"]
@@ -199,13 +202,13 @@ material = SubResource("StandardMaterial3D_h4dnb")
 
 [node name="Chaos_Ball1" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
-mass = 1000.0
+mass = 500.0
 physics_material_override = SubResource("PhysicsMaterial_7sd2t")
 gravity_scale = 0.0
 continuous_cd = true
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Balls/Chaos_Ball1"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_6cl6v")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball1/CollisionShape3D"]
@@ -215,10 +218,13 @@ material = SubResource("StandardMaterial3D_whiw6")
 
 [node name="RedBall" type="RigidBody3D" parent="GoalBalls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mass = 500.0
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_uy55y")
 continuous_cd = true
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GoalBalls/RedBall"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_rxtu0")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/RedBall/CollisionShape3D"]

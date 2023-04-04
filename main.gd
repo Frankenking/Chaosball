@@ -1,10 +1,7 @@
 extends Node3D
 
+
 var rng = RandomNumberGenerator.new()
-var rng2 = RandomNumberGenerator.new()
-
-var multiplier = 0
-
 var randnum1 = 0
 var randnum2 = 0
 
@@ -31,50 +28,33 @@ func _ballposcheck() -> void:
 				$Balls/Chaos_Ball4.position = Vector3(0, 1, 0)
 				
 func _ballvel() -> void:
-
-	randnum1 = randi()% 2
-	randnum2 = randi()% 100
-	if randnum1 == 1:
-		multiplier = 1
-	else:
-		multiplier = -1
-	$Balls/Chaos_Ball1.linear_velocity = Vector3(randnum2 * multiplier, 0, randnum2 * ~multiplier)
 	
-	randnum1 = randi()% 2
-	randnum2 = randi()% 100
-	if randnum1 == 1:
-		multiplier = 1
-	else:
-		multiplier = -1
-	$Balls/Chaos_Ball2.linear_velocity = Vector3(randnum2 * multiplier, 0, randnum2 * ~multiplier)
+	randnum1 = rng.randf_range(-30.0, 30.0)
+	randnum2 = rng.randf_range(-30.0, 30.0)
+	$Balls/Chaos_Ball1.linear_velocity = Vector3(randnum1, 0, randnum2)
 	
-	randnum1 = randi()% 2
-	randnum2 = randi()% 100
-	if randnum1 == 1:
-		multiplier = 1
-	else:
-		multiplier = -1
-	$Balls/Chaos_Ball3.linear_velocity = Vector3(randnum2 * multiplier, 0, randnum2 * ~multiplier)
+	randnum1 = rng.randf_range(-30.0, 30.0)
+	randnum2 = rng.randf_range(-30.0, 30.0)
+	$Balls/Chaos_Ball2.linear_velocity = Vector3(randnum1, 0, randnum2)
 	
-	randnum1 = randi()% 2
-	randnum2 = randi()% 100
-	if randnum1 == 1:
-		multiplier = 1
-	else:
-		multiplier = -1
-	$Balls/Chaos_Ball4.linear_velocity = Vector3(randnum2 * multiplier, 0, randnum2 * ~multiplier)
+	randnum1 = rng.randf_range(-30.0, 30.0)
+	randnum2 = rng.randf_range(-30.0, 30.0)
+	$Balls/Chaos_Ball3.linear_velocity = Vector3(randnum1, 0, randnum2)
+	
+	randnum1 = rng.randf_range(-30.0, 30.0)
+	randnum2 = rng.randf_range(-30.0, 30.0)
+	$Balls/Chaos_Ball4.linear_velocity = Vector3(randnum1, 0, randnum2)
 	
 	
 func _ready():
 	
-	$Balls/Chaos_Ball1.linear_velocity = Vector3(20, 0, 0)
-	$Balls/Chaos_Ball2.linear_velocity = Vector3(-20, 0, 0)
-	$Balls/Chaos_Ball3.linear_velocity = Vector3(0, 0, 20)
-	$Balls/Chaos_Ball4.linear_velocity = Vector3(0, 0, -20)
+	$Balls/Chaos_Ball1.linear_velocity = Vector3(10, 0, 0)
+	$Balls/Chaos_Ball2.linear_velocity = Vector3(-10, 0, 0)
+	$Balls/Chaos_Ball3.linear_velocity = Vector3(0, 0, 10)
+	$Balls/Chaos_Ball4.linear_velocity = Vector3(0, 0, -10)
 	
 func _process(_delta):
 	_ballposcheck()
-	
 	if $ContactTimer.time_left <= 0.05:
 		$ContactTimer.stop()
 		_ballvel()
