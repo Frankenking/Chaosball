@@ -1,31 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://dx860xmw4o61e"]
 
-[ext_resource type="Shader" path="res://shaders/water.gdshader" id="1_kgyrd"]
 [ext_resource type="Script" path="res://main.gd" id="1_mxt7d"]
-[ext_resource type="Texture2D" uid="uid://dbiucbq07v8bs" path="res://textures/water_normal2.jpeg" id="2_4rhmk"]
 [ext_resource type="Texture2D" uid="uid://c2avtomunemgg" path="res://textures/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="3_l4t0j"]
+[ext_resource type="Script" path="res://Character.gd" id="4_3fspr"]
 [ext_resource type="Texture2D" uid="uid://x5c62rwe3f35" path="res://textures/dirt_albedo.png" id="5_0y8xb"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fs6ey"]
-render_priority = 0
-shader = ExtResource("1_kgyrd")
-shader_parameter/surface_color = Color(0, 0, 0.00784314, 1)
-shader_parameter/depth_color = Color(0, 0, 0.654902, 1)
-shader_parameter/opacity = 0.5
-shader_parameter/normal_scale = -8.264
-shader_parameter/beer_factor = 10.0
-shader_parameter/_roughness = null
-shader_parameter/_refraction = null
-shader_parameter/_uv_scale = 1.0
-shader_parameter/_foam_strength = null
-shader_parameter/_foam_size = null
-shader_parameter/normal_map = ExtResource("2_4rhmk")
-
-[sub_resource type="BoxMesh" id="BoxMesh_yeb08"]
-lightmap_size_hint = Vector2i(1004, 516)
-material = SubResource("ShaderMaterial_fs6ey")
-add_uv2 = true
-size = Vector3(100, 1, 100)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_124v6"]
 panorama = ExtResource("3_l4t0j")
@@ -69,17 +47,19 @@ absorbent = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b05kj"]
 albedo_color = Color(1, 0, 0, 1)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b4qxo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swp27"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ebdrj"]
+material = SubResource("StandardMaterial3D_swp27")
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_mxt7d")
 
-[node name="Water" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_yeb08")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_262b8")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 40, 0)
 
 [node name="Arena" type="Node3D" parent="."]
 
@@ -105,7 +85,7 @@ transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
 use_collision = true
 
 [node name="Floor2" type="CSGBox3D" parent="Arena"]
-transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 2, 0)
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 2.5, 0)
 layers = 0
 use_collision = true
 
@@ -131,14 +111,14 @@ light_energy = 16.0
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("BoxShape3D_h26s0")
 
-[node name="GreeRg" type="Area3D" parent="Arena"]
+[node name="GreenRg" type="Area3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, -20)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Arena/GreeRg"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Arena/GreenRg"]
 light_color = Color(0, 1, 0, 1)
 light_energy = 16.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/GreeRg"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/GreenRg"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("BoxShape3D_h26s0")
 
@@ -157,10 +137,11 @@ shape = SubResource("BoxShape3D_h26s0")
 autostart = true
 
 [node name="Balls" type="Node3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 
 [node name="Chaos_Ball4" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
-mass = 500.0
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_7sd2t")
 gravity_scale = 0.0
 continuous_cd = true
@@ -174,7 +155,7 @@ material = SubResource("StandardMaterial3D_g5c1p")
 
 [node name="Chaos_Ball3" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
-mass = 500.0
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_7sd2t")
 gravity_scale = 0.0
 continuous_cd = true
@@ -188,7 +169,7 @@ material = SubResource("StandardMaterial3D_gdei4")
 
 [node name="Chaos_Ball2" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
-mass = 500.0
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_7sd2t")
 gravity_scale = 0.0
 continuous_cd = true
@@ -202,7 +183,7 @@ material = SubResource("StandardMaterial3D_h4dnb")
 
 [node name="Chaos_Ball1" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
-mass = 500.0
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_7sd2t")
 gravity_scale = 0.0
 continuous_cd = true
@@ -230,3 +211,75 @@ shape = SubResource("SphereShape3D_rxtu0")
 [node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/RedBall/CollisionShape3D"]
 use_collision = true
 material = SubResource("StandardMaterial3D_b05kj")
+
+[node name="YellowBall" type="RigidBody3D" parent="GoalBalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 1, 0)
+visible = false
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_uy55y")
+continuous_cd = true
+can_sleep = false
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalBalls/YellowBall"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_rxtu0")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/YellowBall/CollisionShape3D"]
+use_collision = true
+material = SubResource("StandardMaterial3D_b05kj")
+
+[node name="BlueBall" type="RigidBody3D" parent="GoalBalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 1, 0)
+visible = false
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_uy55y")
+continuous_cd = true
+can_sleep = false
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalBalls/BlueBall"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_rxtu0")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/BlueBall/CollisionShape3D"]
+use_collision = true
+material = SubResource("StandardMaterial3D_b05kj")
+
+[node name="GreenBall" type="RigidBody3D" parent="GoalBalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 1, 0)
+visible = false
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_uy55y")
+continuous_cd = true
+can_sleep = false
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalBalls/GreenBall"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_rxtu0")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/GreenBall/CollisionShape3D"]
+use_collision = true
+material = SubResource("StandardMaterial3D_b05kj")
+
+[node name="Character" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.261, 1, -0.898)
+continuous_cd = true
+lock_rotation = true
+script = ExtResource("4_3fspr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Character"]
+shape = SubResource("CapsuleShape3D_b4qxo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Character/CollisionShape3D"]
+mesh = SubResource("SphereMesh_ebdrj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 23.3743, 0)
+fov = 100.0
+
+[connection signal="body_entered" from="Arena/RedRg" to="." method="_on_red_rg_body_entered"]
+[connection signal="body_entered" from="Arena/YellowRg" to="." method="_on_yellow_rg_body_entered"]
+[connection signal="body_entered" from="Arena/GreenRg" to="." method="_on_green_rg_body_entered"]
+[connection signal="body_entered" from="Arena/BlueRg" to="." method="_on_blue_rg_body_entered"]
