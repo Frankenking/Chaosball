@@ -82,17 +82,45 @@ transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 50, 24.5, 1, 0)
 use_collision = true
 size = Vector3(2, 1, 1)
 
+[node name="Corner1" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 25)
+use_collision = true
+radius = 5.0
+height = 3.0
+sides = 30
+
 [node name="Wall2" type="CSGBox3D" parent="Arena"]
 transform = Transform3D(-4.37114e-08, 0, 50, 0, 1, 0, -1, 0, -2.18557e-06, 0, 1, 24.5)
 use_collision = true
+
+[node name="Corner2" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 25)
+use_collision = true
+radius = 5.0
+height = 3.0
+sides = 30
 
 [node name="Wall3" type="CSGBox3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 50, -24.4592, 0.999999, -0.0273914)
 use_collision = true
 
+[node name="Corner3" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, -25)
+use_collision = true
+radius = 5.0
+height = 3.0
+sides = 30
+
 [node name="Wall4" type="CSGBox3D" parent="Arena"]
 transform = Transform3D(-4.37114e-08, 0, 50, 0, 1, 0, -1, 0, -2.18557e-06, 0, 1, -24.5)
 use_collision = true
+
+[node name="Corner4" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -25)
+use_collision = true
+radius = 5.0
+height = 3.0
+sides = 30
 
 [node name="Floor" type="CSGBox3D" parent="Arena"]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
@@ -276,7 +304,8 @@ use_collision = true
 material = SubResource("StandardMaterial3D_uuycx")
 
 [node name="Character" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 1, 0)
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_8rdat")
 gravity_scale = 0.0
 continuous_cd = true
@@ -291,7 +320,7 @@ shape = SubResource("CapsuleShape3D_b4qxo")
 mesh = SubResource("SphereMesh_ebdrj")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 23.3743, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30, 0)
 fov = 100.0
 
 [connection signal="body_entered" from="Arena/RedRg" to="." method="_on_red_rg_body_entered"]

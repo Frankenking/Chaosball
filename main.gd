@@ -16,6 +16,8 @@ var vector = Vector3()
 @onready var Ball3 := $Balls/Chaos_Ball3
 @onready var Ball4 := $Balls/Chaos_Ball4
 
+var points = 0
+
 func _ballposcheck() -> void:
 	
 				
@@ -68,23 +70,26 @@ func _process(_delta):
 		$ContactTimer.stop()
 		_ballvel()
 		$ContactTimer.start()
-	
-
+	if points == 4:
+		pass
 
 func _on_red_rg_body_entered(body):
 	if body == Redball:
 		Redball.queue_free()
-
+		points += 1
+		
 func _on_yellow_rg_body_entered(body):
 	if body == Yellowball:
 		Yellowball.queue_free()
-
+		points += 1
 
 func _on_green_rg_body_entered(body):
 	if body == Greenball:
 		Greenball.queue_free()
-
-
+		points += 1
+		
 func _on_blue_rg_body_entered(body):
 	if body == Blueball:
 		Blueball.queue_free()
+		points += 1
+		
