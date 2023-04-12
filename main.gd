@@ -5,6 +5,7 @@ var rng = RandomNumberGenerator.new()
 var randnum1 = 0
 var randnum2 = 0
 var vector = Vector3()
+@export var BALL_LINEAR = 30
 
 @onready var Redball := $GoalBalls/RedBall
 @onready var Yellowball := $GoalBalls/YellowBall
@@ -64,20 +65,20 @@ func _goalposcheck():
 	
 func _ballvel() -> void:
 	
-	randnum1 = rng.randf_range(-50.0, 50.0)
-	randnum2 = rng.randf_range(-50.0, 50.0)
+	randnum1 = rng.randf_range(-BALL_LINEAR, BALL_LINEAR)
+	randnum2 = rng.randf_range(-BALL_LINEAR, BALL_LINEAR)
 	Ball1.linear_velocity = Vector3(randnum1, 0, randnum2)
 	
-	randnum1 = rng.randf_range(-50.0, 50.0)
-	randnum2 = rng.randf_range(-50.0, 50.0)
+	randnum1 = rng.randf_range(-BALL_LINEAR, BALL_LINEAR)
+	randnum2 = rng.randf_range(-BALL_LINEAR, BALL_LINEAR)
 	Ball2.linear_velocity = Vector3(randnum1, 0, randnum2)
 	
-	randnum1 = rng.randf_range(-50.0, 50.0)
-	randnum2 = rng.randf_range(-50.0, 50.0)
+	randnum1 = rng.randf_range(-BALL_LINEAR, BALL_LINEAR)
+	randnum2 = rng.randf_range(-BALL_LINEAR, BALL_LINEAR)
 	Ball3.linear_velocity = Vector3(randnum1, 0, randnum2)
 	
-	randnum1 = rng.randf_range(-50.0, 50.0)
-	randnum2 = rng.randf_range(-50.0, 50.0)
+	randnum1 = rng.randf_range(-BALL_LINEAR, BALL_LINEAR)
+	randnum2 = rng.randf_range(-BALL_LINEAR, BALL_LINEAR)
 	Ball4.linear_velocity = Vector3(randnum1, 0, randnum2)
 	
 func _ready():
@@ -86,7 +87,7 @@ func _ready():
 	Ball2.linear_velocity = Vector3(-10, 0, 0)
 	Ball3.linear_velocity = Vector3(0, 0, 10)
 	Ball4.linear_velocity = Vector3(0, 0, -10)
-
+	
 func _process(_delta):
 	_ballposcheck()
 	_goalposcheck()

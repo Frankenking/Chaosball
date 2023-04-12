@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dx860xmw4o61e"]
+[gd_scene load_steps=27 format=3 uid="uid://dx860xmw4o61e"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_mxt7d"]
 [ext_resource type="Texture2D" uid="uid://c2avtomunemgg" path="res://textures/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="3_l4t0j"]
@@ -14,10 +14,16 @@ sky_material = SubResource("PanoramaSkyMaterial_124v6")
 [sub_resource type="Environment" id="Environment_262b8"]
 background_mode = 2
 background_color = Color(0.105882, 0.54902, 0.784314, 1)
-background_energy_multiplier = 1.2
+background_energy_multiplier = 2.0
 sky = SubResource("Sky_2t1t3")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1e8i"]
+albedo_color = Color(0.458824, 0.458824, 0.458824, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_h26s0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_64eik"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7sd2t"]
 friction = 0.0
@@ -125,6 +131,7 @@ sides = 30
 [node name="Floor" type="CSGBox3D" parent="Arena"]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
 use_collision = true
+material = SubResource("StandardMaterial3D_d1e8i")
 
 [node name="Floor2" type="CSGBox3D" parent="Arena"]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 2.5, 0)
@@ -137,6 +144,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 1, 21)
 [node name="OmniLight3D" type="OmniLight3D" parent="Arena/RedRg"]
 light_color = Color(1, 0, 0, 1)
 light_energy = 16.0
+light_specular = 16.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/RedRg"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -148,6 +156,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 21)
 [node name="OmniLight3D" type="OmniLight3D" parent="Arena/YellowRg"]
 light_color = Color(1, 1, 0, 1)
 light_energy = 16.0
+light_specular = 16.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/YellowRg"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -157,8 +166,9 @@ shape = SubResource("BoxShape3D_h26s0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, -21)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Arena/GreenRg"]
-light_color = Color(0, 1, 0, 1)
+light_color = Color(0, 0.745098, 0, 1)
 light_energy = 16.0
+light_specular = 16.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/GreenRg"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -170,10 +180,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 1, -21)
 [node name="OmniLight3D" type="OmniLight3D" parent="Arena/BlueRg"]
 light_color = Color(0, 1, 1, 1)
 light_energy = 16.0
+light_specular = 16.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/BlueRg"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("BoxShape3D_h26s0")
+
+[node name="Static Obstacles" type="Node3D" parent="Arena"]
+
+[node name="Box1" type="CSGBox3D" parent="Arena/Static Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_64eik")
 
 [node name="ContactTimer" type="Timer" parent="."]
 autostart = true
