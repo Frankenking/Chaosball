@@ -25,7 +25,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Back"
 
-[node name="VSlider" type="VSlider" parent="Settings"]
+[node name="volume" type="VSlider" parent="Settings"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -37,6 +37,7 @@ offset_right = -473.0
 offset_bottom = -509.0
 grow_horizontal = 2
 grow_vertical = 2
+max_value = 2.0
 
 [node name="Main" type="Control" parent="."]
 visible = false

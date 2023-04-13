@@ -1,6 +1,8 @@
 extends RigidBody3D
 
 var velocity = Vector3()
+var collision_pos = Vector3()
+
 func input():
 	if Input.is_action_pressed("forward"):
 		velocity.z = -150
@@ -22,3 +24,4 @@ func input():
 func _process(delta):
 	velocity = input()
 	$".".constant_force = velocity
+	
