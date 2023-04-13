@@ -1,9 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://dx860xmw4o61e"]
+[gd_scene load_steps=23 format=3 uid="uid://dx860xmw4o61e"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_mxt7d"]
 [ext_resource type="Texture2D" uid="uid://c2avtomunemgg" path="res://textures/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="3_l4t0j"]
 [ext_resource type="Script" path="res://Character.gd" id="4_3fspr"]
-[ext_resource type="Texture2D" uid="uid://x5c62rwe3f35" path="res://textures/dirt_albedo.png" id="5_0y8xb"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_124v6"]
 panorama = ExtResource("3_l4t0j")
@@ -31,17 +30,9 @@ bounce = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6cl6v"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5c1p"]
-albedo_texture = ExtResource("5_0y8xb")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gdei4"]
-albedo_texture = ExtResource("5_0y8xb")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4dnb"]
-albedo_texture = ExtResource("5_0y8xb")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_whiw6"]
-albedo_texture = ExtResource("5_0y8xb")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu2gq"]
+metallic = 1.0
+roughness = 0.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uy55y"]
 friction = 0.0
@@ -52,15 +43,23 @@ absorbent = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rr41v"]
 albedo_color = Color(1, 0, 0, 1)
+metallic = 1.0
+roughness = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xr8wf"]
 albedo_color = Color(1, 1, 0, 1)
+metallic = 1.0
+roughness = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvbcv"]
 albedo_color = Color(0, 0, 1, 1)
+metallic = 1.0
+roughness = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uuycx"]
 albedo_color = Color(0, 1, 0, 1)
+metallic = 1.0
+roughness = 0.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8rdat"]
 friction = 0.0
@@ -211,7 +210,7 @@ can_sleep = false
 shape = SubResource("SphereShape3D_6cl6v")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball4/CollisionShape3D"]
-material = SubResource("StandardMaterial3D_g5c1p")
+material = SubResource("StandardMaterial3D_mu2gq")
 
 [node name="Chaos_Ball3" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
@@ -225,7 +224,7 @@ can_sleep = false
 shape = SubResource("SphereShape3D_6cl6v")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball3/CollisionShape3D"]
-material = SubResource("StandardMaterial3D_gdei4")
+material = SubResource("StandardMaterial3D_mu2gq")
 
 [node name="Chaos_Ball2" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
@@ -239,7 +238,7 @@ can_sleep = false
 shape = SubResource("SphereShape3D_6cl6v")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball2/CollisionShape3D"]
-material = SubResource("StandardMaterial3D_h4dnb")
+material = SubResource("StandardMaterial3D_mu2gq")
 
 [node name="Chaos_Ball1" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
@@ -253,7 +252,7 @@ can_sleep = false
 shape = SubResource("SphereShape3D_6cl6v")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball1/CollisionShape3D"]
-material = SubResource("StandardMaterial3D_whiw6")
+material = SubResource("StandardMaterial3D_mu2gq")
 
 [node name="GoalBalls" type="Node3D" parent="."]
 
