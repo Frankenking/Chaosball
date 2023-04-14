@@ -1,8 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://dx860xmw4o61e"]
+[gd_scene load_steps=29 format=3 uid="uid://dx860xmw4o61e"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_mxt7d"]
 [ext_resource type="Texture2D" uid="uid://c2avtomunemgg" path="res://textures/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="3_l4t0j"]
+[ext_resource type="Script" path="res://CastEffect.gd" id="4_0erdl"]
 [ext_resource type="Script" path="res://Character.gd" id="4_3fspr"]
+[ext_resource type="AudioStream" uid="uid://ceao4oth2ijhq" path="res://audio/roll.mp3" id="5_8kkjf"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_124v6"]
 panorama = ExtResource("3_l4t0j")
@@ -13,7 +15,7 @@ sky_material = SubResource("PanoramaSkyMaterial_124v6")
 [sub_resource type="Environment" id="Environment_262b8"]
 background_mode = 2
 background_color = Color(0.105882, 0.54902, 0.784314, 1)
-background_energy_multiplier = 2.0
+background_energy_multiplier = 1.5
 sky = SubResource("Sky_2t1t3")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1e8i"]
@@ -21,30 +23,36 @@ albedo_color = Color(0.458824, 0.458824, 0.458824, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h26s0"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_64eik"]
-albedo_color = Color(0, 0, 0, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ilaxf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xj13"]
+albedo_color = Color(0, 0.396078, 0.396078, 1)
+metallic = 1.0
+emission_enabled = true
+emission = Color(0.0313726, 0.568627, 0.568627, 1)
+emission_energy_multiplier = 16.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7sd2t"]
 friction = 0.0
 bounce = 1.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_6cl6v"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu2gq"]
 metallic = 1.0
 roughness = 0.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6cl6v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uy55y"]
 friction = 0.0
 bounce = 1.0
 absorbent = true
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_rxtu0"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rr41v"]
 albedo_color = Color(1, 0, 0, 1)
 metallic = 1.0
 roughness = 0.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rxtu0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xr8wf"]
 albedo_color = Color(1, 1, 0, 1)
@@ -63,16 +71,36 @@ roughness = 0.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8rdat"]
 friction = 0.0
-bounce = 1.0
 absorbent = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b4qxo"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_oqj3o"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swp27"]
-albedo_color = Color(0, 0, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45jou"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_ebdrj"]
-material = SubResource("StandardMaterial3D_swp27")
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q5q7s"]
+particle_flag_rotate_y = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, -3, 0)
+initial_velocity_min = 1.5
+initial_velocity_max = 3.0
+damping_min = 1.0
+damping_max = 1.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vtnsd"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 200.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_pakqy"]
+material = SubResource("StandardMaterial3D_vtnsd")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1551r"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_mxt7d")
@@ -87,6 +115,10 @@ transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 50, 24.5, 1, 0)
 use_collision = true
 size = Vector3(2, 1, 1)
 
+[node name="wall_Collider" type="GPUParticlesCollisionBox3D" parent="Arena/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+size = Vector3(1, 5, 1)
+
 [node name="Corner1" type="CSGCylinder3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 25)
 use_collision = true
@@ -97,6 +129,10 @@ sides = 30
 [node name="Wall2" type="CSGBox3D" parent="Arena"]
 transform = Transform3D(-4.37114e-08, 0, 50, 0, 1, 0, -1, 0, -2.18557e-06, 0, 1, 24.5)
 use_collision = true
+
+[node name="wall_Collider" type="GPUParticlesCollisionBox3D" parent="Arena/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+size = Vector3(1, 5, 1)
 
 [node name="Corner2" type="CSGCylinder3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 25)
@@ -109,6 +145,10 @@ sides = 30
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 50, -24.4592, 0.999999, -0.0273914)
 use_collision = true
 
+[node name="floor_Collider" type="GPUParticlesCollisionBox3D" parent="Arena/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+size = Vector3(1, 5, 1)
+
 [node name="Corner3" type="CSGCylinder3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, -25)
 use_collision = true
@@ -119,6 +159,10 @@ sides = 30
 [node name="Wall4" type="CSGBox3D" parent="Arena"]
 transform = Transform3D(-4.37114e-08, 0, 50, 0, 1, 0, -1, 0, -2.18557e-06, 0, 1, -24.5)
 use_collision = true
+
+[node name="floor_Collider" type="GPUParticlesCollisionBox3D" parent="Arena/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+size = Vector3(1, 5, 1)
 
 [node name="Corner4" type="CSGCylinder3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -25)
@@ -131,6 +175,10 @@ sides = 30
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
 use_collision = true
 material = SubResource("StandardMaterial3D_d1e8i")
+
+[node name="floor_Collider" type="GPUParticlesCollisionBox3D" parent="Arena/Floor"]
+transform = Transform3D(0.02, 0, 0, 0, 1, 0, 0, 0, 0.02, 0, 0.0331535, 0)
+size = Vector3(50, 1, 50)
 
 [node name="Floor2" type="CSGBox3D" parent="Arena"]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 2.5, 0)
@@ -185,12 +233,39 @@ light_specular = 16.0
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("BoxShape3D_h26s0")
 
+[node name="Moving Obstacles" type="Node3D" parent="Arena"]
+
+[node name="Variant1" type="Node3D" parent="Arena/Moving Obstacles"]
+
+[node name="Variant2" type="Node3D" parent="Arena/Moving Obstacles"]
+
+[node name="Variant3" type="Node3D" parent="Arena/Moving Obstacles"]
+
 [node name="Static Obstacles" type="Node3D" parent="Arena"]
 
-[node name="Box1" type="CSGBox3D" parent="Arena/Static Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
-use_collision = true
-material = SubResource("StandardMaterial3D_64eik")
+[node name="Variant1" type="Node3D" parent="Arena/Static Obstacles"]
+
+[node name="Variant2" type="Node3D" parent="Arena/Static Obstacles"]
+
+[node name="Variant3" type="Node3D" parent="Arena/Static Obstacles"]
+
+[node name="Variant4" type="Node3D" parent="Arena/Static Obstacles"]
+
+[node name="Variant5" type="Node3D" parent="Arena/Static Obstacles"]
+
+[node name="Freeze" type="Area3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.552648, 10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Freeze"]
+shape = SubResource("BoxShape3D_ilaxf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Arena/Freeze/CollisionShape3D"]
+size = Vector3(1, 0.1, 1)
+material = SubResource("StandardMaterial3D_1xj13")
+
+[node name="Timer" type="Timer" parent="Arena/Freeze"]
+wait_time = 10.0
+one_shot = true
 
 [node name="ContactTimer" type="Timer" parent="."]
 autostart = true
@@ -206,11 +281,11 @@ gravity_scale = 0.0
 continuous_cd = true
 can_sleep = false
 
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball4"]
+material = SubResource("StandardMaterial3D_mu2gq")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Balls/Chaos_Ball4"]
 shape = SubResource("SphereShape3D_6cl6v")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball4/CollisionShape3D"]
-material = SubResource("StandardMaterial3D_mu2gq")
 
 [node name="Chaos_Ball3" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
@@ -220,11 +295,11 @@ gravity_scale = 0.0
 continuous_cd = true
 can_sleep = false
 
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball3"]
+material = SubResource("StandardMaterial3D_mu2gq")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Balls/Chaos_Ball3"]
 shape = SubResource("SphereShape3D_6cl6v")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball3/CollisionShape3D"]
-material = SubResource("StandardMaterial3D_mu2gq")
 
 [node name="Chaos_Ball2" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
@@ -234,11 +309,11 @@ gravity_scale = 0.0
 continuous_cd = true
 can_sleep = false
 
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball2"]
+material = SubResource("StandardMaterial3D_mu2gq")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Balls/Chaos_Ball2"]
 shape = SubResource("SphereShape3D_6cl6v")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball2/CollisionShape3D"]
-material = SubResource("StandardMaterial3D_mu2gq")
 
 [node name="Chaos_Ball1" type="RigidBody3D" parent="Balls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
@@ -248,77 +323,77 @@ gravity_scale = 0.0
 continuous_cd = true
 can_sleep = false
 
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball1"]
+material = SubResource("StandardMaterial3D_mu2gq")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Balls/Chaos_Ball1"]
 shape = SubResource("SphereShape3D_6cl6v")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Balls/Chaos_Ball1/CollisionShape3D"]
-material = SubResource("StandardMaterial3D_mu2gq")
 
 [node name="GoalBalls" type="Node3D" parent="."]
 
 [node name="RedBall" type="RigidBody3D" parent="GoalBalls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -5)
-mass = 0.5
+mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_uy55y")
 gravity_scale = 0.0
 continuous_cd = true
 contact_monitor = true
 can_sleep = false
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/RedBall"]
+use_collision = true
+material = SubResource("StandardMaterial3D_rr41v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GoalBalls/RedBall"]
 shape = SubResource("SphereShape3D_rxtu0")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/RedBall/CollisionShape3D"]
-use_collision = true
-material = SubResource("StandardMaterial3D_rr41v")
-
 [node name="YellowBall" type="RigidBody3D" parent="GoalBalls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -5)
-mass = 0.5
+mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_uy55y")
 gravity_scale = 0.0
 continuous_cd = true
 contact_monitor = true
 can_sleep = false
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/YellowBall"]
+use_collision = true
+material = SubResource("StandardMaterial3D_xr8wf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GoalBalls/YellowBall"]
 shape = SubResource("SphereShape3D_rxtu0")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/YellowBall/CollisionShape3D"]
-use_collision = true
-material = SubResource("StandardMaterial3D_xr8wf")
-
 [node name="BlueBall" type="RigidBody3D" parent="GoalBalls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 5)
-mass = 0.5
+mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_uy55y")
 gravity_scale = 0.0
 continuous_cd = true
 contact_monitor = true
 can_sleep = false
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/BlueBall"]
+use_collision = true
+material = SubResource("StandardMaterial3D_kvbcv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GoalBalls/BlueBall"]
 shape = SubResource("SphereShape3D_rxtu0")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/BlueBall/CollisionShape3D"]
-use_collision = true
-material = SubResource("StandardMaterial3D_kvbcv")
-
 [node name="GreenBall" type="RigidBody3D" parent="GoalBalls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 5)
-mass = 0.5
+mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_uy55y")
 gravity_scale = 0.0
 continuous_cd = true
 contact_monitor = true
 can_sleep = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalBalls/GreenBall"]
-shape = SubResource("SphereShape3D_rxtu0")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/GreenBall/CollisionShape3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="GoalBalls/GreenBall"]
 use_collision = true
 material = SubResource("StandardMaterial3D_uuycx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalBalls/GreenBall"]
+shape = SubResource("SphereShape3D_rxtu0")
 
 [node name="Character" type="RigidBody3D" parent="."]
 transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 1, 0)
@@ -328,22 +403,62 @@ gravity_scale = 0.0
 continuous_cd = true
 contact_monitor = true
 can_sleep = false
+lock_rotation = true
 script = ExtResource("4_3fspr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Character"]
-shape = SubResource("CapsuleShape3D_b4qxo")
+shape = SubResource("SphereShape3D_oqj3o")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Character/CollisionShape3D"]
-mesh = SubResource("SphereMesh_ebdrj")
+[node name="MeshInstance3D" type="CSGSphere3D" parent="Character/CollisionShape3D"]
+material = SubResource("StandardMaterial3D_45jou")
 
-[node name="RayCast3D" type="RayCast3D" parent="Character"]
-target_position = Vector3(0, 0, 0)
+[node name="CastEffect" type="Node3D" parent="Character"]
+process_priority = 3
+transform = Transform3D(1.53846, 0, 0, 0, 1.53846, 0, 0, 0, 1.53846, 0, 0, 0)
+script = ExtResource("4_0erdl")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Character/CastEffect"]
+emitting = false
+amount = 1000
+lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_q5q7s")
+draw_pass_1 = SubResource("BoxMesh_pakqy")
+
+[node name="area1" type="Area3D" parent="Character/CastEffect"]
+process_mode = 3
+process_priority = 3
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.5, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Character/CastEffect/area1"]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Character/CastEffect/area1"]
+shape = SubResource("BoxShape3D_1551r")
+
+[node name="roll" type="AudioStreamPlayer" parent="Character"]
+stream = ExtResource("5_8kkjf")
+volume_db = -80.0
+autoplay = true
+
+[node name="roll2" type="AudioStreamPlayer" parent="Character"]
+stream = ExtResource("5_8kkjf")
+pitch_scale = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30, 0)
 fov = 100.0
 
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera3D"]
+offset_right = 264.0
+offset_bottom = 56.0
+
+[node name="Stopwatch" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="Arena/RedRg" to="." method="_on_red_rg_body_entered"]
 [connection signal="body_entered" from="Arena/YellowRg" to="." method="_on_yellow_rg_body_entered"]
 [connection signal="body_entered" from="Arena/GreenRg" to="." method="_on_green_rg_body_entered"]
 [connection signal="body_entered" from="Arena/BlueRg" to="." method="_on_blue_rg_body_entered"]
+[connection signal="body_entered" from="Arena/Freeze" to="." method="_on_freeze_body_entered"]
+[connection signal="body_entered" from="Character/CastEffect/area1" to="Character/CastEffect" method="_on_area_1_body_entered"]
+[connection signal="body_exited" from="Character/CastEffect/area1" to="Character/CastEffect" method="_on_area_1_body_exited"]
