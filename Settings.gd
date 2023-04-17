@@ -32,3 +32,63 @@ func _on_rough_value_changed(value):
 	PlayPresets.player_rough = $Player/Rough.value
 	$"3dDisplays/playerPrev".material.roughness = PlayPresets.player_rough
 
+
+
+func _on_brick_pressed():
+	PlayPresets.player_texture = preload("res://textures/brick.jpg")
+	$"3dDisplays/playerPrev".material.albedo_texture = PlayPresets.player_texture
+
+
+func _on_dirt_pressed():
+	PlayPresets.player_texture = preload("res://textures/dirt_albedo.png")
+	$"3dDisplays/playerPrev".material.albedo_texture = PlayPresets.player_texture
+
+
+func _on_grass_pressed():
+	PlayPresets.player_texture = preload("res://textures/grass.png")
+	$"3dDisplays/playerPrev".material.albedo_texture = PlayPresets.player_texture
+
+
+func _on_marble_pressed():
+	PlayPresets.player_texture = preload("res://textures/marble.jpg")
+	$"3dDisplays/playerPrev".material.albedo_texture = PlayPresets.player_texture
+
+
+func _on_sand_pressed():
+	PlayPresets.player_texture = preload("res://textures/sand1.jpg")
+	$"3dDisplays/playerPrev".material.albedo_texture = PlayPresets.player_texture
+
+
+func _on_stone_pressed():
+	PlayPresets.player_texture = preload("res://textures/stone.jpg")
+	$"3dDisplays/playerPrev".material.albedo_texture = PlayPresets.player_texture
+
+
+func _on_brick_2_pressed():
+	PlayPresets.ball_texture = preload("res://textures/brick.jpg")
+	$"3dDisplays/ballPrev".material.albedo_texture = PlayPresets.ball_texture
+
+
+func _on_dirt_2_pressed():
+	PlayPresets.ball_texture = preload("res://textures/dirt_albedo.png")
+	$"3dDisplays/ballPrev".material.albedo_texture = PlayPresets.ball_texture
+
+
+func _on_grass_2_pressed():
+	PlayPresets.ball_texture = preload("res://textures/grass.png")
+	$"3dDisplays/ballPrev".material.albedo_texture = PlayPresets.ball_texture
+
+
+func _on_marble_2_pressed():
+	PlayPresets.ball_texture = preload("res://textures/marble.jpg")
+	$"3dDisplays/ballPrev".material.albedo_texture = PlayPresets.ball_texture
+
+
+func _on_sand_2_pressed():
+	PlayPresets.ball_texture = preload("res://textures/sand1.jpg")
+	$"3dDisplays/ballPrev".material.albedo_texture = PlayPresets.ball_texture
+
+
+func _on_stone_2_pressed():
+	PlayPresets.ball_texture = preload("res://textures/stone.jpg")
+	$"3dDisplays/ballPrev".material.albedo_texture = PlayPresets.ball_texture

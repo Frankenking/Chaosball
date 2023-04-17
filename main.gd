@@ -100,22 +100,27 @@ func _ready():
 	$Balls/Chaos_Ball1/CSGSphere3D.material.albedo_color = PlayPresets.ball_albedo
 	$Balls/Chaos_Ball1/CSGSphere3D.material.metallic = PlayPresets.ball_metallic
 	$Balls/Chaos_Ball1/CSGSphere3D.material.roughness = PlayPresets.ball_rough
+	$Balls/Chaos_Ball1/CSGSphere3D.material.albedo_texture = PlayPresets.ball_texture
 	
 	$Balls/Chaos_Ball2/CSGSphere3D.material.albedo_color = PlayPresets.ball_albedo
 	$Balls/Chaos_Ball2/CSGSphere3D.material.metallic = PlayPresets.ball_metallic
 	$Balls/Chaos_Ball2/CSGSphere3D.material.roughness = PlayPresets.ball_rough
+	$Balls/Chaos_Ball2/CSGSphere3D.material.albedo_texture = PlayPresets.ball_texture
 	
 	$Balls/Chaos_Ball3/CSGSphere3D.material.albedo_color = PlayPresets.ball_albedo
 	$Balls/Chaos_Ball3/CSGSphere3D.material.metallic = PlayPresets.ball_metallic
 	$Balls/Chaos_Ball3/CSGSphere3D.material.roughness = PlayPresets.ball_rough
+	$Balls/Chaos_Ball3/CSGSphere3D.material.albedo_texture = PlayPresets.ball_texture
 	
 	$Balls/Chaos_Ball4/CSGSphere3D.material.albedo_color = PlayPresets.ball_albedo
 	$Balls/Chaos_Ball4/CSGSphere3D.material.metallic = PlayPresets.ball_metallic
 	$Balls/Chaos_Ball4/CSGSphere3D.material.roughness = PlayPresets.ball_rough
+	$Balls/Chaos_Ball4/CSGSphere3D.material.albedo_texture = PlayPresets.ball_texture
 	
 	$Character/CollisionShape3D/MeshInstance3D.material.albedo_color = PlayPresets.player_albedo
 	$Character/CollisionShape3D/MeshInstance3D.material.metallic = PlayPresets.player_metallic
 	$Character/CollisionShape3D/MeshInstance3D.material.roughness = PlayPresets.player_rough
+	$Character/CollisionShape3D/MeshInstance3D.material.albedo_texture = PlayPresets.player_texture
 	
 func _process(_delta):
 	_ballposcheck()
@@ -126,48 +131,68 @@ func _process(_delta):
 		print(time)
 	if $ContactTimer.time_left <= 0.05:
 		$ContactTimer.stop()
-		if freeze == false:
-			_ballvel()
-		else:
-			Ball1.linear_velocity = Vector3(0, 0, 0)
-			Ball2.linear_velocity = Vector3(0, 0, 0)
-			Ball3.linear_velocity = Vector3(0, 0, 0)
-			Ball4.linear_velocity = Vector3(0, 0, 0)
+		_ballvel()
 			
 		$ContactTimer.start()
+	if points == 1:
+		$"Arena/Static Obstacles/CSGBox3D".show()
+		$"Arena/Static Obstacles/CSGBox3D2".show()
+		$"Arena/Static Obstacles/CSGBox3D3".show()
+		$"Arena/Static Obstacles/CSGBox3D4".show()
+		$"Arena/Static Obstacles/CSGBox3D5".show()
+		$"Arena/Moving Obstacles/CSGBox3D".show()
+		$"Arena/Static Obstacles/CSGBox3D".collision_layer = 1
+		$"Arena/Static Obstacles/CSGBox3D2".collision_layer = 1
+		$"Arena/Static Obstacles/CSGBox3D3".collision_layer = 1
+		$"Arena/Static Obstacles/CSGBox3D4".collision_layer = 1
+		$"Arena/Static Obstacles/CSGBox3D5".collision_layer = 1
+		$"Arena/Moving Obstacles/CSGBox3D".collision_layer = 1
+	if points == 2:
+		$"Arena/Static Obstacles/CSGBox3D6".show()
+		$"Arena/Static Obstacles/CSGBox3D7".show()
+		$"Arena/Static Obstacles/CSGBox3D8".show()
+		$"Arena/Moving Obstacles/CSGCylinder3D".show()
+		$"Arena/Static Obstacles/CSGBox3D6".collision_layer = 1
+		$"Arena/Static Obstacles/CSGBox3D7".collision_layer = 1
+		$"Arena/Static Obstacles/CSGBox3D8".collision_layer = 1
+		$"Arena/Moving Obstacles/CSGCylinder3D".collision_layer = 1
+	if points == 3:
+		$"Arena/Static Obstacles/CSGBox3D9".show()
+		$"Arena/Static Obstacles/CSGBox3D10".show()
+		$"Arena/Static Obstacles/CSGBox3D11".show()
+		$"Arena/Static Obstacles/CSGBox3D12".show()
+		$"Arena/Static Obstacles/CSGBox3D9".collision_layer = 1
+		$"Arena/Static Obstacles/CSGBox3D10".collision_layer = 1
+		$"Arena/Static Obstacles/CSGBox3D11".collision_layer = 1
+		$"Arena/Static Obstacles/CSGBox3D12".collision_layer = 1
 	if points == 4:
 		PlayPresets.time = time
 		get_tree().change_scene_to_file("res://win_screen.tscn")
-	if $Arena/Freeze/Timer.time_left == 0:
-		freeze = false
 
 func _on_red_rg_body_entered(body):
 	if body == Redball:
 		Redball.queue_free()
 		points += 1
 		ballRed = false
-	
+		$Arena/RedRg.queue_free()
+		
 func _on_yellow_rg_body_entered(body):
 	if body == Yellowball:
 		Yellowball.queue_free()
 		points += 1
 		ballYellow = false
-	
+		$Arena/YellowRg.queue_free()
+		
 func _on_green_rg_body_entered(body):
 	if body == Greenball:
 		Greenball.queue_free()
 		points += 1
 		ballGreen = false
+		$Arena/GreenRg.queue_free()
 	
 func _on_blue_rg_body_entered(body):
 	if body == Blueball:
 		Blueball.queue_free()
 		points += 1
 		ballBlue = false
-
-
-func _on_freeze_body_entered(body):
-	if body == $Character:
-		freeze = true
-		$Arena/Freeze/Timer.start()
-		
+		$Arena/BlueRg.queue_free()

@@ -2,24 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0ef35wcbl7v7"
-path="res://.godot/imported/water_normal.jpg-746fb82f43d0b779bb2d2a6e20a16acb.ctex"
+uid="uid://bisjmcponycbk"
+path="res://.godot/imported/sand1.jpg-09c32708ef0959d5657c70f59498353e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/water_normal.jpg"
-dest_files=["res://.godot/imported/water_normal.jpg-746fb82f43d0b779bb2d2a6e20a16acb.ctex"]
+source_file="res://textures/sand1.jpg"
+dest_files=["res://.godot/imported/sand1.jpg-09c32708ef0959d5657c70f59498353e.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
-compress/hdr_compression=0
-compress/normal_map=1
+compress/hdr_compression=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

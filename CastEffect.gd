@@ -13,12 +13,10 @@ func _ready():
 	$"../roll2".volume_db = $"../roll2".volume_db
 func _collide_fx():
 	if isfast() and collided:
-		$"../../Camera3D/RichTextLabel".text = str(obj)
 		$GPUParticles3D.emitting = true
 		$"../roll2".playing = true
 	else:
 		$GPUParticles3D.emitting = false
-		$"../../Camera3D/RichTextLabel".text = "no hits"
 
 func _process(delta):
 	_collide_fx()

@@ -9,6 +9,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwbfl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y3gr0"]
+albedo_color = Color(0.756863, 0.756863, 0.756863, 1)
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -30,25 +31,27 @@ grow_vertical = 2
 script = ExtResource("2_su7dr")
 
 [node name="3dDisplays" type="Control" parent="Settings"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("3_xjosb")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Settings/3dDisplays"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.21875
-anchor_top = 0.262963
-anchor_right = 0.78125
-anchor_bottom = 0.737037
-offset_left = 411.25
-offset_top = 273.481
-offset_right = 1468.75
-offset_bottom = 766.518
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -256.0
+offset_right = 540.0
+offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="Settings/3dDisplays/SubViewportContainer"]
 handle_input_locally = false
@@ -75,132 +78,208 @@ material = SubResource("StandardMaterial3D_y3gr0")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Settings/3dDisplays"]
 light_energy = 0.5
 
-[node name="Back" type="Button" parent="Settings/3dDisplays"]
-layout_mode = 0
-offset_right = 45.0
-offset_bottom = 31.0
-text = "Back"
-
 [node name="Player" type="Control" parent="Settings"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 540.0
-offset_top = -258.0
-offset_right = 770.0
-offset_bottom = -81.0
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.794271
+anchor_top = 0.277778
+anchor_right = 0.924479
+anchor_bottom = 0.740741
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="PlayerBallColorWheel" type="ColorPickerButton" parent="Settings/Player"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -26.5
-offset_right = 32.0
-offset_bottom = 26.5
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.3
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Settings/Player/PlayerBallColorWheel"]
 layout_mode = 0
-offset_left = -58.0
-offset_top = -32.0
-offset_right = 121.0
-offset_bottom = -6.0
+anchor_left = -0.5
+anchor_top = -1.0
+anchor_right = 1.5
+anchor_bottom = -0.48
 text = "Player Ball Color Wheel"
+metadata/_edit_use_anchors_ = true
 
 [node name="Metallic" type="HSlider" parent="Settings/Player"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -34.0
-offset_top = -37.0
-offset_right = 36.0
-offset_bottom = 3.0
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.8
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 0
 max_value = 1.0
 step = 0.1
+metadata/_edit_use_anchors_ = true
 
 [node name="Rough" type="HSlider" parent="Settings/Player"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -34.0
-offset_top = 3.0
-offset_right = 36.0
-offset_bottom = 43.0
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.3
+anchor_right = 0.8
+anchor_bottom = 0.4
 grow_horizontal = 2
 grow_vertical = 0
 max_value = 1.0
 step = 0.1
+metadata/_edit_use_anchors_ = true
+
+[node name="brick" type="Button" parent="Settings/Player"]
+offset_left = 100.0
+offset_top = 250.0
+offset_right = 150.0
+offset_bottom = 300.0
+text = "Brick"
+
+[node name="dirt" type="Button" parent="Settings/Player"]
+offset_left = 150.0
+offset_top = 250.0
+offset_right = 200.0
+offset_bottom = 300.0
+text = "Dirt"
+
+[node name="grass" type="Button" parent="Settings/Player"]
+offset_left = 100.0
+offset_top = 300.0
+offset_right = 152.0
+offset_bottom = 350.0
+text = "Grass"
+
+[node name="marble" type="Button" parent="Settings/Player"]
+offset_left = 150.0
+offset_top = 300.0
+offset_right = 200.0
+offset_bottom = 350.0
+text = "Marble"
+clip_text = true
+
+[node name="sand" type="Button" parent="Settings/Player"]
+offset_left = 100.0
+offset_top = 350.0
+offset_right = 150.0
+offset_bottom = 400.0
+text = "Sand"
+
+[node name="stone" type="Button" parent="Settings/Player"]
+offset_left = 150.0
+offset_top = 350.0
+offset_right = 200.0
+offset_bottom = 400.0
+text = "Stone"
+clip_text = true
 
 [node name="ChaosBall" type="Control" parent="Settings"]
-layout_mode = 3
+layout_mode = 2
 anchors_preset = 0
-offset_left = 169.0
-offset_top = 221.0
-offset_right = 469.0
-offset_bottom = 521.0
+anchor_left = 0.078125
+anchor_top = 0.277778
+anchor_right = 0.208333
+anchor_bottom = 0.740741
+metadata/_edit_use_anchors_ = true
 
 [node name="ChaosBallColorWheel" type="ColorPickerButton" parent="Settings/ChaosBall"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -26.5
-offset_right = 32.0
-offset_bottom = 26.5
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.3
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Settings/ChaosBall/ChaosBallColorWheel"]
 layout_mode = 0
-offset_left = -53.0
-offset_top = -33.5
-offset_right = 125.0
-offset_bottom = -7.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = -24.0
 text = "Chaos Ball Color Wheel"
 
 [node name="Metallic2" type="HSlider" parent="Settings/ChaosBall"]
 layout_mode = 0
-offset_left = 114.0
-offset_top = 200.0
-offset_right = 184.0
-offset_bottom = 240.0
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.8
+anchor_bottom = 0.5
+metadata/_edit_use_anchors_ = true
 
 [node name="Rough2" type="HSlider" parent="Settings/ChaosBall"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -34.0
-offset_top = -60.0
-offset_right = 36.0
-offset_bottom = -20.0
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.3
+anchor_right = 0.8
+anchor_bottom = 0.4
 grow_horizontal = 2
 grow_vertical = 0
 max_value = 1.0
 step = 0.1
+metadata/_edit_use_anchors_ = true
+
+[node name="brick2" type="Button" parent="Settings/ChaosBall"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 250.0
+offset_right = 150.0
+offset_bottom = 300.0
+text = "Brick"
+
+[node name="dirt2" type="Button" parent="Settings/ChaosBall"]
+offset_left = 150.0
+offset_top = 250.0
+offset_right = 200.0
+offset_bottom = 300.0
+text = "Dirt"
+
+[node name="grass2" type="Button" parent="Settings/ChaosBall"]
+offset_left = 100.0
+offset_top = 300.0
+offset_right = 152.0
+offset_bottom = 350.0
+text = "Grass"
+
+[node name="marble2" type="Button" parent="Settings/ChaosBall"]
+offset_left = 150.0
+offset_top = 300.0
+offset_right = 200.0
+offset_bottom = 350.0
+text = "Marble"
+clip_text = true
+
+[node name="sand2" type="Button" parent="Settings/ChaosBall"]
+offset_left = 100.0
+offset_top = 350.0
+offset_right = 150.0
+offset_bottom = 400.0
+text = "Sand"
+
+[node name="stone2" type="Button" parent="Settings/ChaosBall"]
+offset_left = 150.0
+offset_top = 350.0
+offset_right = 200.0
+offset_bottom = 400.0
+text = "Stone"
+clip_text = true
+
+[node name="Back" type="Button" parent="Settings"]
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 31.0
+text = "Back"
 
 [node name="Main" type="Control" parent="."]
 layout_mode = 1
@@ -266,13 +345,25 @@ offset_right = 1009.0
 offset_bottom = 482.0
 text = "CrazyBall"
 
-[connection signal="pressed" from="Settings/3dDisplays/Back" to="." method="_on_back_pressed"]
 [connection signal="color_changed" from="Settings/Player/PlayerBallColorWheel" to="Settings" method="_on_player_ball_color_wheel_color_changed"]
 [connection signal="value_changed" from="Settings/Player/Metallic" to="Settings" method="_on_metallic_value_changed"]
 [connection signal="value_changed" from="Settings/Player/Rough" to="Settings" method="_on_rough_value_changed"]
+[connection signal="pressed" from="Settings/Player/brick" to="Settings" method="_on_brick_pressed"]
+[connection signal="pressed" from="Settings/Player/dirt" to="Settings" method="_on_dirt_pressed"]
+[connection signal="pressed" from="Settings/Player/grass" to="Settings" method="_on_grass_pressed"]
+[connection signal="pressed" from="Settings/Player/marble" to="Settings" method="_on_marble_pressed"]
+[connection signal="pressed" from="Settings/Player/sand" to="Settings" method="_on_sand_pressed"]
+[connection signal="pressed" from="Settings/Player/stone" to="Settings" method="_on_stone_pressed"]
 [connection signal="color_changed" from="Settings/ChaosBall/ChaosBallColorWheel" to="Settings" method="_on_chaos_ball_color_wheel_color_changed"]
 [connection signal="value_changed" from="Settings/ChaosBall/Metallic2" to="Settings" method="_on_metallic_2_value_changed"]
 [connection signal="value_changed" from="Settings/ChaosBall/Rough2" to="Settings" method="_on_rough_2_value_changed"]
+[connection signal="pressed" from="Settings/ChaosBall/brick2" to="Settings" method="_on_brick_2_pressed"]
+[connection signal="pressed" from="Settings/ChaosBall/dirt2" to="Settings" method="_on_dirt_2_pressed"]
+[connection signal="pressed" from="Settings/ChaosBall/grass2" to="Settings" method="_on_grass_2_pressed"]
+[connection signal="pressed" from="Settings/ChaosBall/marble2" to="Settings" method="_on_marble_2_pressed"]
+[connection signal="pressed" from="Settings/ChaosBall/sand2" to="Settings" method="_on_sand_2_pressed"]
+[connection signal="pressed" from="Settings/ChaosBall/stone2" to="Settings" method="_on_stone_2_pressed"]
+[connection signal="pressed" from="Settings/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Main/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Main/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Main/Settings_Button" to="." method="_on_settings_button_pressed"]
